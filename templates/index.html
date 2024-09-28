@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュースサイト</title>
+    <style>
+        /* 全体のスタイル */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ヘッダーのスタイル */
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid #00aaff;
+            padding-bottom: 10px;
+        }
+
+        /* ニュースセクションのタイトルスタイル */
+        h2 {
+            font-size: 1.8em;
+            color: #34495e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            text-align: left;
+            width: 100%;
+            max-width: 800px;
+            letter-spacing: 0.5px;
+            border-left: 5px solid #00aaff;
+            padding-left: 10px;
+        }
+
+        /* フォームのスタイル */
+        form {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        input:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 5px rgba(0, 170, 255, 0.3);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #008ecc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* グリッドレイアウトのスタイル */
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0;
+            max-width: 1200px;
+            width: 100%;
+            list-style: none;
+        }
+
+        /* カードスタイル */
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        li:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* ニュースタイトルのスタイル */
+        a {
+            text-decoration: none;
+            color: #00aaff;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #005f7f;
+        }
+
+        /* 日付表示のスタイル */
+        p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        /* メディアクエリでモバイル対応 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            form {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ニュース検索</h1>
+    <form action="/search" method="post">
+        <input type="text" name="keyword" placeholder="検索キーワードを入力">
+        <button type="submit">検索</button>
+    </form>
+
+    <h2>最新ニュース</h2>
+    <ul>
+        {% for item in news %}
+        <li>
+            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+            <p>公開日: {{ item.published }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
