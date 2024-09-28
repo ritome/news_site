@@ -172,7 +172,8 @@
     <ul>
         {% for item in news %}
         <li>
-            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+            <!-- 記事の題名をリンクとして表示 -->
+            <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
             <p>公開日: {{ item.published }}</p>
         </li>
         {% endfor %}
